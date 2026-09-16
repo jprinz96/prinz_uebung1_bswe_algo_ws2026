@@ -17,7 +17,7 @@ public class CsvFileReader {
      */
     public int[][] readUnsolvedSudoku() {
         Path path = Paths.get("src", "main", "resources", "input.csv");
-        int[][] sudoku = new int[9][9];
+        int[][] sudokuBoard = new int[9][9];
         try (BufferedReader br = Files.newBufferedReader(path)) {
             String line;
             int row = 0;
@@ -45,12 +45,12 @@ public class CsvFileReader {
                                 + row + ", column: " + col + " invalid. Must be between 0 and 9");
                     }
 
-                    sudoku[row][col] = value;
+                    sudokuBoard[row][col] = value;
                 }
                 row++;
 
             }
-            if (row < sudoku.length) {
+            if (row < sudokuBoard.length) {
                 throw new IllegalArgumentException("Sudoku must contain exactly 9 rows");
             }
         } catch (IOException e) {
@@ -58,7 +58,7 @@ public class CsvFileReader {
             throw new RuntimeException("Could not load Sudoku file", e);
         }
         log.info("Sudoku successfully read");
-        return sudoku;
+        return sudokuBoard;
     }
 
 }
