@@ -10,6 +10,11 @@ import java.nio.file.Paths;
 
 @Log4j2
 public class CsvFileReader {
+    /**
+     * Reads an unsolved Sudoku from the input.csv file.
+     *
+     * @return a 9x9 Sudoku array where 0 represents an empty cell
+     */
     public int[][] readUnsolvedSudoku() {
         Path path = Paths.get("src", "main", "resources", "input.csv");
         int[][] sudoku = new int[9][9];
