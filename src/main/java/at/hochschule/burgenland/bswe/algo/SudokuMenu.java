@@ -61,16 +61,29 @@ public class SudokuMenu {
                 0 - Exit""");
     }
 
-    private static int[][] copySudoku(int[][] board) {
-        int[][] copy = new int[board.length][];
+    /**
+     * Creates a deep copy of the given Sudoku board.
+     * Changes to the original board therefore do not affect the copy.
+     *
+     * @param sudokuBoard the Sudoku board to copy
+     * @return an independent copy of the board
+     */
+    private static int[][] copySudoku(int[][] sudokuBoard) {
+        int[][] copy = new int[sudokuBoard.length][];
 
-        for (int row = 0; row < board.length; row++) {
-            copy[row] = board[row].clone();
+        for (int row = 0; row < sudokuBoard.length; row++) {
+            copy[row] = sudokuBoard[row].clone();
         }
 
         return copy;
     }
-
+    /**
+     * Prints the solved Sudoku in a grid.
+     * Numbers inserted by the solver are displayed in cyan.
+     *
+     * @param solvedBoard the solved Sudoku
+     * @param originalBoard the original board used to identify inserted numbers
+     */
     private static void printSudoku(int[][] solvedBoard, int[][] originalBoard) {
         System.out.println("+-------+-------+-------+");
 

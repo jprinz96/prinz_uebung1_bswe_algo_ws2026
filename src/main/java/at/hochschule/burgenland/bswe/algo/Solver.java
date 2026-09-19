@@ -1,7 +1,16 @@
 package at.hochschule.burgenland.bswe.algo;
-
+/**
+ * Solves 9x9 Sudoku boards using a recursive backtracking algorithm.
+ */
 public class Solver {
 
+    /**
+     * Attempts to solve the given Sudoku board.
+     * The provided board is modified during the solving process.
+     *
+     * @param sudokuBoard the 9x9 Sudoku board where 0 represents an empty field
+     * @return the solved board, or {@code null} if no solution exists
+     */
     public static int[][] solve(int[][] sudokuBoard) {
         if (isSudokuSolvable(sudokuBoard)) {
             return sudokuBoard;
@@ -9,6 +18,32 @@ public class Solver {
         return null;
     }
 
+    /**
+     * Recursively fills empty fields using backtracking.
+     *
+     * @param sudokuBoard the Sudoku board being solved
+     * @return {@code true} if a valid solution was found
+     */
+    private static boolean isSudokuSolvable(int[][] sudokuBoard) {
+        for (int row = 0; row < sudokuBoard.length; row++) {
+            for (int col = 0; col < sudokuBoard.length; col++) {
+                if (sudokuBoard[row][col] == 0) {
+                    for (int tryNumber = 1; tryNumber <= sudokuBoard.length; tryNumber++) {
+                        if (isValid(sudokuBoard, row, col, tryNumber)) {
+                            sudokuBoard[row][col] = tryNumber;
+                            if (isSudokuSolvable(sudokuBoard)) {
+                                return true;
+                            } else {
+                                sudokuBoard[row][col] = 0;
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     private static boolean isValid(int[][] sudokuBoard, int row, int col, int number) {
         if (!isNumberInRow(sudokuBoard, row, number)
                 && !isNumberInColumn(sudokuBoard, col, number)
@@ -51,24 +86,4 @@ public class Solver {
         return false;
     }
 
-    private static boolean isSudokuSolvable(int[][] sudokuBoard) {
-        for (int row = 0; row < sudokuBoard.length; row++) {
-            for (int col = 0; col < sudokuBoard.length; col++) {
-                if (sudokuBoard[row][col] == 0) {
-                    for (int tryNumber = 1; tryNumber <= sudokuBoard.length; tryNumber++) {
-                        if (isValid(sudokuBoard, row, col, tryNumber)) {
-                            sudokuBoard[row][col] = tryNumber;
-                            if (isSudokuSolvable(sudokuBoard)) {
-                                return true;
-                            } else {
-                                sudokuBoard[row][col] = 0;
-                            }
-                        }
-                    }
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 }
