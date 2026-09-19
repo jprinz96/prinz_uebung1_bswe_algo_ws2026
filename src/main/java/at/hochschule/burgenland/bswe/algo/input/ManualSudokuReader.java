@@ -2,7 +2,7 @@ package at.hochschule.burgenland.bswe.algo.input;
 
 import java.util.Scanner;
 
-public class ManuelSudokuReader {
+public class ManualSudokuReader {
     public static int[][] readSudokuByUserInput(Scanner scan) {
         int[][] sudoku = new int[9][9];
         for (int row = 0; row < sudoku.length; row++) {

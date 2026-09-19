@@ -1,7 +1,7 @@
 package at.hochschule.burgenland.bswe.algo;
 
 import at.hochschule.burgenland.bswe.algo.input.CsvFileReader;
-import at.hochschule.burgenland.bswe.algo.input.ManuelSudokuReader;
+import at.hochschule.burgenland.bswe.algo.input.ManualSudokuReader;
 
 import java.util.Scanner;
 
@@ -25,7 +25,7 @@ public class SudokuMenu {
                     solveSudoku(unsolvedSudoku);
                 }
                 case "2" -> {
-                    int[][] unsolvedSudoku = ManuelSudokuReader.readSudokuByUserInput(scan);
+                    int[][] unsolvedSudoku = ManualSudokuReader.readSudokuByUserInput(scan);
                     solveSudoku(unsolvedSudoku);
                 }
                 case "0" -> running = false;
