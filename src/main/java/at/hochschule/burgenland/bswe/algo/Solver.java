@@ -49,13 +49,9 @@ public class Solver {
     }
 
     private static boolean isValid(int[][] sudokuBoard, int row, int col, int number) {
-        if (!isNumberInRow(sudokuBoard, row, number)
+        return !isNumberInRow(sudokuBoard, row, number)
                 && !isNumberInColumn(sudokuBoard, col, number)
-                && !isNumberInBox(sudokuBoard, row, col, number)) {
-            return true;
-        }
-
-        return false;
+                && !isNumberInBox(sudokuBoard, row, col, number);
     }
 
     private static boolean isNumberInRow(int[][] sudokuBoard, int row, int numberToCheck) {
