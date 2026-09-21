@@ -23,10 +23,18 @@ public class CsvFileReader {
             int row = 0;
 
             while ((line = br.readLine()) != null) {
+                if (row >= sudokuBoard.length) {
+                    throw new IllegalArgumentException(
+                            "Sudoku must contain exactly 9 rows"
+                    );
+                }
+
                 String[] values = line.split(",");
 
                 if (values.length != 9) {
-                    throw new IllegalArgumentException("Row: " + (row + 1) + " must be of length 9");
+                    throw new IllegalArgumentException(
+                            "Each row must contain exactly 9 values"
+                    );
                 }
                 for (int col = 0; col < values.length; col++) {
                     int value;
@@ -62,7 +70,7 @@ public class CsvFileReader {
     }
 
     //Method for testing
-    int[][] readUnsolvedSudoku(String filename){
+    int[][] readUnsolvedSudoku(String filename) {
         Path path = Paths.get("src", "test", "resources", filename);
         int[][] sudokuBoard = new int[9][9];
 
