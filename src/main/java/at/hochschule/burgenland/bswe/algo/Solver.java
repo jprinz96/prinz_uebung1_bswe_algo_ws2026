@@ -1,4 +1,5 @@
 package at.hochschule.burgenland.bswe.algo;
+
 /**
  * Solves 9x9 Sudoku boards using a recursive backtracking algorithm.
  */
@@ -12,7 +13,9 @@ public class Solver {
      * @return the solved board, or {@code null} if no solution exists
      */
     public static int[][] solve(int[][] sudokuBoard) {
-        if (isSudokuSolvable(sudokuBoard)) {
+        if (!checkCompletedWrongSudoku(sudokuBoard)) {
+            return null;
+        } else if (isSudokuSolvable(sudokuBoard)) {
             return sudokuBoard;
         }
         return null;
@@ -44,6 +47,7 @@ public class Solver {
         }
         return true;
     }
+
     private static boolean isValid(int[][] sudokuBoard, int row, int col, int number) {
         if (!isNumberInRow(sudokuBoard, row, number)
                 && !isNumberInColumn(sudokuBoard, col, number)
@@ -84,6 +88,31 @@ public class Solver {
             }
         }
         return false;
+    }
+
+    private static boolean checkCompletedWrongSudoku(int[][] sudokuBoard) {
+        for (int row = 0; row < sudokuBoard.length; row++) {
+            for (int col = 0; col < sudokuBoard.length; col++) {
+                int checkNumber = sudokuBoard[row][col];
+
+                if (checkNumber == 0) {
+                    continue;
+                }
+                if (checkNumber < 1 || checkNumber > 9) {
+                    return false;
+                }
+                sudokuBoard[row][col] = 0; //so that it doesn’t find itself
+                boolean valid = isValid(sudokuBoard, row, col, checkNumber);
+                sudokuBoard[row][col] = checkNumber; //reallocate after the examination
+
+                if (!valid) {
+                    return false;
+                }
+
+
+            }
+        }
+        return true;
     }
 
 }
