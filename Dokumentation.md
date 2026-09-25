@@ -22,6 +22,16 @@ Bei einem leeren Feld werden maximal neun Zahlen ausprobiert. Für jede Möglich
 
 Der Aufwand hängt also von der Anzahl der leeren Felder ab. In der Praxis schließt `isValid()` viele Möglichkeiten frühzeitig aus. Die tatsächliche Laufzeit hängt deshalb auch von der Anordnung der vorgegebenen Zahlen und davon ab, wie oft der Algorithmus zurückgehen muss.
 
+### Best Case T(n)best = O(n)<br>
+Bei jedem leeren Feld passt gleich die erste gültige Zahl auch für die weitere Lösung. Der Solver muss daher nicht zurückgehen. Für jedes leere Feld kommt ein weiterer rekursiver Aufruf dazu. Der Aufwand wächst linear mit der Anzahl der leeren Felder.
+
+### Average Case <br>
+Wie viele Versuche im Durchschnitt nötig sind, hängt vom Sudoku ab. Bei manchen findet der Solver schnell eine Lösung, bei anderen muss er öfter zurückgehen. Eine genaue durchschnittliche Laufzeit lässt sich ohne weitere Annahmen über die verwendeten Sudokus nicht angeben.
+
+### Worst Case T(n)worst = O(9ⁿ)<br>
+Bei einem leeren Feld werden maximal neun Zahlen ausprobiert. Für jede Möglichkeit können beim nächsten leeren Feld wieder bis zu neun Zahlen ausprobiert werden. Bei `n` leeren Feldern wird der Aufwand deshalb mit **O(9ⁿ)** abgeschätzt. In der Praxis schließt `isValid()` viele Möglichkeiten schon früher aus.
+
+
 # Platzkomplexität
 Das Sudoku wird direkt im vorhandenen Array verändert, es werden keine Kopien erstellt. Die Größe des Arrays bleibt immer 9×9.
 
